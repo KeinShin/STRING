@@ -24,9 +24,12 @@ from pyrogram.errors import (
 )
 from pyromod import listen
 
-from core import OWNER, bot
-from core.Config import *
-from core.data_mongo.assistant_data import *
+bot = Client(
+    "ses bot",
+    os.environ.get("TG_APP_ID"),
+    os.environ.get("TG_API_HASH"),
+    bot_token = os.environ.get("TOKEN")
+)
 
 
 @bot.on_message(filters.command("string") & filters.user(OWNER) & filters.private)
@@ -126,3 +129,6 @@ async def stringsessiongenerator(client, message):
     except Exception as e:
         await bot.send_message(chat.id, f"**ERROR:** `{str(e)}`")
         return
+
+    
+  bot.run()
